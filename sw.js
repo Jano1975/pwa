@@ -87,3 +87,20 @@ self.addEventListener('fetch', e=>{
                 })
     );
 });
+
+//Evento Push
+
+self.addEventListener('push', function (event) {
+    console.log('[Service Worker] Notificacion Push recibida.');
+    console.log(`[Service Worker] Datos de la notificacion Push: "${event.data.text()}"`);
+
+    const title = 'La aplicacion dice';
+    const options = {
+        body: 'Si, esto funciona',
+        icon: './img/favicon.png',
+        badge: './img/6.png'
+    };
+
+    const notificationPromise = self.registration.showNotification(title, options);
+    event.waitUntil(notificationPromise);
+});
